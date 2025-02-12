@@ -11,6 +11,7 @@
 import React, { useState, useRef } from 'react';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
+import SEO from '../components/SEO';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -22,24 +23,29 @@ const Contact = () => {
   const inputRef = useRef(null);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.firstname]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     inputRef.current.reset();
 
-    const { data, error } = await supabase.from("contacts").insert([formData]);
+    const { data, error } = await supabase.from('contact').insert([formData]);
     if(error) {
       console.log("Error inserting data:", error);
     } else {
       alert("Message sent successfully", data);
-      setFormData({ firstname: "", lastname: "", email: "", subject: "", message: ""});
+      // setFormData({ firstname: "", lastname: "", email: "", subject: "", message: ""});
     }
   }
 
   return (
     <div className="pt-16">
+      <SEO
+        title="Contact Us - UI Mitra"
+        description="Get in touch with UI Mitra for all your UI/UX design needs. We're here to help you create stunning and user-friendly interfaces."
+        keywords="contact, UI/UX, design, user experience, user interface, design services, web design, mobile design" 
+      />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-primary to-secondary text-white py-20">
         <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -163,7 +169,7 @@ const Contact = () => {
                   <Mail className="h-6 w-6 text-secondary mt-1" />
                   <div className="ml-4">
                     <h3 className="font-semibold">Email</h3>
-                    <p className="text-gray-600">hello@designcraft.com</p>
+                    <p className="text-gray-600">hello@uimitra.com</p>
                   </div>
                 </div>
 

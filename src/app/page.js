@@ -101,8 +101,6 @@
 // }
 
 import React from 'react';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import { Monitor, Users, Layout, Lightbulb, ArrowRight, Star } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -112,9 +110,6 @@ import dashboard from '../app/public/dashboard-img.jpeg';
 
 const Home = () => {
   return (
-    <div>
-        {/* <Navbar /> */}
-
       <div className="pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-r from-primary to-secondary text-white py-20 lg:py-32">
@@ -297,11 +292,6 @@ const Home = () => {
           </div>
         </section>
       </div>
-
-      {/* <div>
-        <Footer />
-      </div> */}
-    </div>
   )
 }
 
