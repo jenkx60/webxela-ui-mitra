@@ -100,6 +100,7 @@
 //   );
 // }
 
+"use client"
 import React from 'react';
 import { Monitor, Users, Layout, Lightbulb, ArrowRight, Star } from 'lucide-react';
 import Link from 'next/link';
@@ -107,48 +108,140 @@ import Image from 'next/image';
 import ecom from '../app/public/ecom-redesign.jpeg';
 import bank from '../app/public/banking-img.jpeg';
 import dashboard from '../app/public/dashboard-img.jpeg';
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
+import Particles from './components/Particles';
+import SpotlightCard from './components/Spotlight';
+import RotatingText from './components/TrueFocus';
+import TrueFocus from './components/TrueFocus';
+import FallingText from './components/FallingText';
+import Aurora from './components/Aurora';
 
 const Home = () => {
+
+  // const defaultOptions = {
+  //   loop: true,
+  //   autoplay: true,
+  //   animationData: animationData,
+  //   rendererSettings: {
+  //     preserveAspectRatio: 'xMidYMid slice',
+  //   }
+  // };
+
+  const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: false });
+  const { ref: servicesRef, inView: servicesInView } = useInView({ triggerOnce: false });
+  const { ref: workRef, inView: workInView } = useInView({ triggerOnce: false });
+  const { ref: testimonialsRef, inView: testimonialsInView } = useInView({ triggerOnce: false });
+  const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: false })
+
+  const fadeInUp = {
+    initial: { opacity: 0, y: 100 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 1 }
+  };
+
+  const fadeIn = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 1 }
+  }
   return (
       <div className="pt-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-r from-primary to-secondary text-white py-20 lg:py-32">
-          <div className="absolute inset-0 bg-black opacity-50"></div>
+          <div className="absolute inset-0 bg-black opacity-50">
+            <Particles 
+              particleColors={['#ED184F', '#ffffff']}
+              particleCount={250}
+              particleSpread={10}
+              speed={0.6}
+              particleBaseSize={200}
+              moveParticlesOnHover={true}
+              alphaParticles={false}
+              disableRotation={false}
+            />
+          </div>
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                Crafting Exceptional User Experiences
-              </h1>
-              <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-                Where innovation meets design to create meaningful digital experiences that inspire and engage.
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link
-                  href="/portfolio"
-                  className="bg-white text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300"
-                >
-                  View Our Work
-                </Link>
-                <Link
-                  href="/contact"
-                  className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-secondary transition duration-300"
-                >
-                  Let&apos;s Talk
-                </Link>
-              </div>
-            </div>
+              <motion.div
+                className='text-center'
+                initial={{ opacity: 0, y: -100 }}
+                // initial="initial"
+                animate={{ opacity: heroInView ? 1 : 0, y: heroInView ? 0 : -50 }}
+                // animate={heroInView ? "animate" : "initial"}
+                // variants={fadeInUp}
+                transition={{ duration: 2 }}
+                ref={heroRef}
+              >
+                <TrueFocus
+                  sentence="Crafting Exceptional User Experiences"
+                  manualMode={false}
+                  blurAmount={3}
+                  borderColor="red"
+                  animationDuration={1.5}
+                  pauseBetweenAnimations={0.5}
+                  className="text-xl md:text-5xl lg:text-6xl font-bold mb-10" 
+                />
+                {/* <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                  Crafting Exceptional User Experiences
+                </h1> */}
+                {/* <FallingText
+                  text={`Where innovation meets design to create meaningful digital experiences that inspire and engage.`}
+                  highlightWords={['innovation', 'create', 'digital', 'experiences', 'inspire']}
+                  highlightClass="highlighted"
+                  trigger="hover"
+                  backgroundColor="transparent"
+                  wireframes={false}
+                  gravity={0.56}
+                  fontSize="2rem"
+                  mouseConstraintStiffness={0.9} 
+                /> */}
+                <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto my-5">
+                  Where innovation meets design to create meaningful digital experiences that inspire and engage.
+                </p>
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                  <Link
+                    href="/portfolio"
+                    // className="bg-white text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg"
+                    className='relative flex px-8 py-3 items-center justify-center overflow-hidden bg-red-50 text-secondary rounded-xl font-semibold shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-secondary before:duration-100 before:ease-linear hover:bg-secondary hover:text-white hover:shadow-red-600 hover:before:border-[25px]'
+                  >
+                    <span className='relative z-10'>View Our Work</span>
+                  </Link>
+                  <Link
+                    href="/contact"
+                    // className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-secondary transition duration-300 transform hover:scale-105 hover:shadow-lg"
+                    className='before:ease relative px-8 py-3 overflow-hidden border border-white shadow-2xl rounded-xl font-semibold text-secondary transition duration-300 transform hover:scale-105 before:absolute before:left-0 before:-ml-2 before:h-48 before:w-48 before:origin-top-right before:-translate-x-full before:translate-y-12 before:-rotate-90 before:bg-secondary before:transition-all before:duration-300 hover:text-white hover:shadow-secondary hover:before:-rotate-180'
+                  >
+                    <span className='relative z-10'>Let&apos;s Talk</span>
+                  </Link>
+                </div>
+              </motion.div>
           </div>
         </section>
 
         {/* Services Section */}
         <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <motion.div
+              className='text-center mb-16'
+              initial={{ opacity: 0 }}
+              // initial="initial"
+              animate={{ opacity: servicesInView ? 1 : 0 }}
+              // animate={servicesInView ? "animate" : "initial"}
+              transition={{ duration: 2 }}
+              // variants={fadeIn}
+              ref={servicesRef}
+            >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
               <p className="text-xl text-gray-600">Comprehensive design solutions for your digital needs</p>
-            </div>
+            </motion.div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: servicesInView ? 1 : 0 }}
+              transition={{ duration: 2 }}
+              ref={servicesRef}
+            >
               {[
                 {
                   icon: <Layout className="h-8 w-8 text-secondary" />,
@@ -166,28 +259,45 @@ const Home = () => {
                   description: 'Bringing ideas to life with interactive prototypes and wireframes.'
                 }
               ].map((service, index) => (
-                <div key={index} className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-                  <div className="mb-4">{service.icon}</div>
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
-                  <Link href="/services" className="text-secondary font-medium flex items-center hover:text-secondary">
-                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
+                <div key={index} className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl duration-300 relative overflow-hidden border border-secondary text-secondary transition-all before:absolute before:left-0 before:top-0 before:h-full before:w-0 before:duration-700 after:absolute after:right-0 after:top-0 after:h-full after:w-0 after:duration-700 hover:text-white hover:shadow-pink-400 hover:before:w-2/4 hover:before:bg-primary hover:after:w-2/4 hover:after:bg-primary">
+                  <div className='relative z-10'>
+                    {/* <SpotlightCard className="custom-spotlight-card" spotlightColor="#ED184F"> */}
+                    <div className="mb-4">{service.icon}</div>
+                    <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                    <p className="text-gray-600 mb-4">{service.description}</p>
+                    <Link href="/services" className="text-secondary font-medium flex items-center hover:text-secondary">
+                      Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </div>
+                  
+                  {/* </SpotlightCard> */}
                 </div>
               ))}
+            </motion.div>
             </div>
-          </div>
         </section>
 
         {/* Featured Work */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: workInView ? 1 : 0 }}
+              transition={{ duration: 2 }}
+              ref={workRef}
+            >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Work</h2>
               <p className="text-xl text-gray-600">Some of our recent projects that made an impact</p>
-            </div>
+            </motion.div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: workInView ? 1 : 0 }}
+              transition={{ duration: 2 }}
+              ref={workRef}
+            >
               {[
                 {
                   image: ecom.src,
@@ -227,19 +337,31 @@ const Home = () => {
                   </div>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
         {/* Testimonials */}
         <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: testimonialsInView ? 1 : 0 }}
+              transition={{ duration: 2 }}
+              ref={testimonialsRef}
+            >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
               <p className="text-xl text-gray-600">Don&apos;t just take our word for it</p>
-            </div>
+            </motion.div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: testimonialsInView ? 1 : 0 }}
+              transition={{ duration: 2 }}
+              ref={testimonialsRef}
+            >
               {[
                 {
                   quote: "Working with DesignCraft was a game-changer for our product. Their attention to detail and user-centric approach helped us create an exceptional experience for our customers.",
@@ -274,20 +396,37 @@ const Home = () => {
                   </div>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
         {/* CTA Section */}
         <section className="py-20 bg-secondary">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Transform Your Digital Experience?</h2>
-            <p className="text-xl text-indigo-100 mb-8">Let&apos;s create something amazing together</p>
+            <motion.h2 
+                className="text-3xl md:text-4xl font-bold text-white mb-4"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: ctaInView ? 1 : 0, y: ctaInView ? 0 : 50 }}
+                transition={{ duration: 2 }}
+                ref={ctaRef}
+              >
+                Ready to Transform Your Digital Experience?
+            </motion.h2>
+            <motion.p 
+                className="text-xl text-indigo-100 mb-8"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: ctaInView ? 1 : 0, y: ctaInView ? 0 : 50 }}
+                transition={{ duration: 2 }}
+                ref={ctaRef}
+              >
+                Let&apos;s create something amazing together
+            </motion.p>
             <Link
               href="/contact"
-              className="inline-block bg-white text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300"
+              // className="inline-block bg-white text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300"
+              className='relative inline-block px-8 py-3 items-center justify-center overflow-hidden bg-red-50 text-secondary rounded-xl font-semibold shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-primary before:duration-100 before:ease-linear hover:bg-primary hover:text-white hover:shadow-red-600 hover:before:border-[25px]'
             >
-              Get Started Today
+              <span className='relative z-10'>Get Started Today</span>
             </Link>
           </div>
         </section>

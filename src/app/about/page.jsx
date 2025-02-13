@@ -7,7 +7,7 @@
 // }
 
 // export default page
-
+"use client"
 import React from 'react';
 import { Users, Heart, Zap, Target, Award, Smile } from 'lucide-react';
 import emily from '@/app/public/emily.jpeg';
@@ -15,6 +15,7 @@ import micheal from '@/app/public/micheal.jpeg';
 import sarah from '@/app/public/sarah.jpeg';
 import team from '@/app/public/team.jpeg';
 import Image from 'next/image';
+import TiltedCard from '../components/TiltedCard';
 
 const About = () => {
   const coreValues = [
@@ -133,12 +134,31 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <Image
+                {/* <Image
                   src={member.image}
                   alt={member.name}
                   width={150}
                   height={50}
                   className="w-full h-64 object-cover"
+                /> */}
+                <TiltedCard 
+                  imageSrc={member.image}
+                  altText={member.name}
+                  captionText={member.name}
+                  containerHeight="300px"
+                  containerWidth="300px"
+                  imageHeight="300px"
+                  imageWidth="300px"
+                  rotateAmplitude={12}
+                  scaleOnHover={1.2}
+                  showMobileWarning={false}
+                  showTooltip={true}
+                  displayOverlayContent={true}
+                  overlayContent={
+                    <p className="tilted-card-demo-text">
+                      {member.name}
+                    </p>
+                  }
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2">{member.name}</h3>

@@ -37,8 +37,8 @@ const Navbar = () => {
             <Link href="/portfolio" className="text-gray-700 hover:text-secondary px-3 py-2 text-sm font-semibold">Portfolio</Link>
             <Link href="/blog" className="text-gray-700 hover:text-secondary px-3 py-2 text-sm font-semibold">Blog</Link>
             <Link href="/contact" className="text-gray-700 hover:text-secondary px-3 py-2 text-sm font-semibold">Contact</Link>
-            <Link href="/contact" className="bg-secondary text-white px-4 py-2 rounded-md text-sm font-semibold">
-              Get Free Consulation
+            <Link href="/contact" className="bg-transparent text-secondary px-4 py-2 rounded-md text-sm font-semibold hover:before:bg-redborder-red-500 relative overflow-hidden border border-secondary shadow-2xl transition-all before:absolute before:bottom-0 before:left-0 before:top-0 before:z-0 before:h-full before:w-0 before:bg-red-500 before:transition-all before:duration-500 hover:text-primary hover:shadow-red-500 hover:before:left-0 hover:before:w-full">
+              <span className='relative z-10'>Get Free Consulation</span>
             </Link>
           </div>
 
