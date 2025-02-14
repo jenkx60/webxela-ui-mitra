@@ -108,14 +108,15 @@ import Image from 'next/image';
 import ecom from '../app/public/ecom-redesign.jpeg';
 import bank from '../app/public/banking-img.jpeg';
 import dashboard from '../app/public/dashboard-img.jpeg';
+import test from '../app/public/undraw_testimonials_4c7y-2.svg';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import Particles from './components/Particles';
-import SpotlightCard from './components/Spotlight';
-import RotatingText from './components/TrueFocus';
+// import SpotlightCard from './components/Spotlight';
+// import RotatingText from './components/TrueFocus';
 import TrueFocus from './components/TrueFocus';
-import FallingText from './components/FallingText';
-import Aurora from './components/Aurora';
+// import FallingText from './components/FallingText';
+// import Aurora from './components/Aurora';
 
 const Home = () => {
 
@@ -269,7 +270,6 @@ const Home = () => {
                       Learn More <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </div>
-                  
                   {/* </SpotlightCard> */}
                 </div>
               ))}
@@ -342,8 +342,8 @@ const Home = () => {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="pt-20 pb-40 bg-gray-50 ">
+          <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               className="text-center mb-16"
               initial={{ opacity: 0 }}
@@ -398,6 +398,22 @@ const Home = () => {
               ))}
             </motion.div>
           </div>
+
+          <motion.div 
+            className='mx-auto relative'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: testimonialsInView ? 1 : 0 }}
+            transition={{ duration: 2 }}
+            ref={testimonialsRef}
+          >
+              <Image 
+                src={test}
+                alt='testimonials'
+                width={300}
+                height={400}
+                className='absolute right-12 -bottom-32 mx-auto'
+              />
+          </motion.div>
         </section>
 
         {/* CTA Section */}
@@ -405,8 +421,8 @@ const Home = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.h2 
                 className="text-3xl md:text-4xl font-bold text-white mb-4"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: ctaInView ? 1 : 0, y: ctaInView ? 0 : 50 }}
+                initial={{ opacity: 0, x: -150 }}
+                animate={{ opacity: ctaInView ? 1 : 0, x: ctaInView ? 0 : -150 }}
                 transition={{ duration: 2 }}
                 ref={ctaRef}
               >

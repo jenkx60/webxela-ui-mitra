@@ -9,6 +9,7 @@ import brand from '../public/brand-id.jpeg';
 import social from '../public/social-plat.jpeg';
 import fitness from '../public/fitness.jpeg';
 import Image from 'next/image';
+import SplitText from '../components/SplitText';
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -97,6 +98,10 @@ const Portfolio = () => {
     }
   ];
 
+  const handleAnimationComplete = () => {
+    console.log('All letter are animated')
+  }
+
   const filteredProjects = activeFilter === 'all' 
     ? projects 
     : projects.filter(project => project.category === activeFilter);
@@ -106,8 +111,19 @@ const Portfolio = () => {
       {/* Portfolio Header */}
       <section className="bg-gradient-to-r from-primary to-secondary text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Portfolio</h1>
-          <p className="text-xl text-red-100 max-w-3xl mx-auto">
+          <SplitText
+            text="Our Portfolio"
+            className="text-4xl md:text-5xl font-bold text-center"
+            delay={200}
+            animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+            animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+            easing="easeOutCubic"
+            threshold={0.3}
+            rootMargin="-50px"
+            onLetterAnimationComplete={handleAnimationComplete} 
+          />
+          {/* <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Portfolio</h1> */}
+          <p className="text-xl text-red-100 max-w-3xl mx-auto mt-6">
             Explore our latest work and see how we've helped businesses transform their digital presence
           </p>
         </div>
