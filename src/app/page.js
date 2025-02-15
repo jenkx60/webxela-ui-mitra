@@ -232,14 +232,31 @@ const Home = () => {
               // variants={fadeIn}
               ref={servicesRef}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-              <p className="text-xl text-gray-600">Comprehensive design solutions for your digital needs</p>
+              <motion.h2 
+                className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                initial={{ opacity: 0, x: -150 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 2 }}
+                ref={servicesRef}
+              >
+                Our Services
+              </motion.h2>
+
+              <motion.p 
+                className="text-xl text-gray-600"
+                initial={{ opacity: 0, x: 150 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 2 }}
+                ref={servicesRef}
+              >
+                Comprehensive design solutions for your digital needs
+              </motion.p>
             </motion.div>
             
             <motion.div
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: servicesInView ? 1 : 0 }}
+              initial={{ opacity: 0, y: 200 }}
+              animate={{ opacity: servicesInView ? 1 : 0, y: servicesInView ? 0 : 200 }}
               transition={{ duration: 2 }}
               ref={servicesRef}
             >
@@ -287,14 +304,30 @@ const Home = () => {
               transition={{ duration: 2 }}
               ref={workRef}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Work</h2>
-              <p className="text-xl text-gray-600">Some of our recent projects that made an impact</p>
+              <motion.h2 
+                className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                initial={{ opacity: 0, y: -100 }}
+                animate={{ opacity: workInView ? 1 : 0, y: workInView ? 0 : -100 }}
+                transition={{ duration: 2 }}
+                ref={workRef}
+              >
+                Featured Work
+              </motion.h2>
+              <motion.p 
+                className="text-xl text-gray-600"
+                initial={{ opacity: 0, x: -150 }}
+                animate={{ opacity: workInView ? 1 : 0, x: workInView ? 0 : -150 }}
+                transition={{ duration: 2 }}
+                ref={workRef}
+              >
+                Some of our recent projects that made an impact
+              </motion.p>
             </motion.div>
             
             <motion.div 
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: workInView ? 1 : 0 }}
+              initial={{ opacity: 0, x: 200 }}
+              animate={{ opacity: workInView ? 1 : 0, x: workInView ? 0 : 200 }}
               transition={{ duration: 2 }}
               ref={workRef}
             >

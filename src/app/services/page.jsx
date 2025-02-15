@@ -1,15 +1,7 @@
-// import React from 'react'
-
-// const page = () => {
-//   return (
-//     <div>page</div>
-//   )
-// }
-
-// export default page
-
+"use client"
 import React from 'react';
 import { Monitor, Users, Layout, Lightbulb, ArrowRight, Zap, Target, Search } from 'lucide-react';
+import SplitText from '../components/SplitText';
 
 const Services = () => {
   const services = [
@@ -62,6 +54,10 @@ const Services = () => {
     }
   ];
 
+  const handleAnimationComplete = () => {
+    console.log('All letter are animated')
+  }
+
   return (
     <div className="pt-16">
       {/* Hero Section */}
@@ -69,8 +65,19 @@ const Services = () => {
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Expertise in UI/UX Design</h1>
-            <p className="text-xl max-w-3xl mx-auto">
+            <SplitText
+              text="Our Expertise in UI/UX Design"
+              className="text-4xl md:text-5xl font-bold text-center"
+              delay={200}
+              animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+              animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+              easing="easeOutCubic"
+              threshold={0.3}
+              rootMargin="-50px"
+              onLetterAnimationComplete={handleAnimationComplete} 
+            />
+            {/* <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Expertise in UI/UX Design</h1> */}
+            <p className="text-xl max-w-3xl mx-auto mt-6">
               We offer end-to-end design solutions to elevate your user experience and transform your digital presence.
             </p>
           </div>
@@ -82,7 +89,7 @@ const Services = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {services.map((service, index) => (
-              <div key={index} className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+              <div key={index} className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-110 hover:bg-primary hover:text-white">
                 <div className="inline-block p-3 bg-red-100 rounded-full mb-4">
                   {service.icon}
                 </div>
