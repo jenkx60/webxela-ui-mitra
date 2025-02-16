@@ -141,9 +141,10 @@ const Services = () => {
           <h2 className="text-3xl font-bold text-white mb-8">Let's Transform Your Ideas into Reality!</h2>
           <a
             href="/contact"
-            className="inline-block bg-white text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300"
+            // className="inline-block bg-white text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300"
+            className='relative inline-block px-8 py-3 items-center justify-center overflow-hidden bg-red-50 text-secondary rounded-xl font-semibold shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-primary before:duration-100 before:ease-linear hover:bg-primary hover:text-white hover:shadow-red-600 hover:before:border-[25px]'
           >
-            Start Your Project
+            <span className='relative z-10'>Start Your Project</span>
           </a>
         </div>
       </section>

@@ -1,17 +1,11 @@
-// import React from 'react'
-
-// const page = () => {
-//   return (
-//     <div>page</div>
-//   )
-// }
-
-// export default page
 "use client"
 import React, { useState, useRef } from 'react';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
+import BlurText from '../components/BlurText';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -37,7 +31,16 @@ const Contact = () => {
       alert("Message sent successfully", data);
       // setFormData({ firstname: "", lastname: "", email: "", subject: "", message: ""});
     }
-  }
+  };
+
+  const handleAnimationComplete = () => {
+    console.log("Animation Complete")
+  };
+
+  const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: false });
+  const { ref: contactRef, inView: contactInView } = useInView({ triggerOnce: false });
+  const { ref: contactInfoRef, inView: contactInfoInView } = useInView({ triggerOnce: false });
+  const { ref: faqRef, inView: faqInView } = useInView({ triggerOnce: false });
 
   return (
     <div className="pt-16">
@@ -51,10 +54,24 @@ const Contact = () => {
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Get in Touch</h1>
-            <p className="text-xl max-w-3xl mx-auto">
+            <BlurText
+              text="Get in Touch!"
+              delay={100}
+              animateBy="letter"
+              direction="top"
+              onAnimationComplete={handleAnimationComplete}
+              className="text-4xl md:text-5xl font-bold mb-6 text-center flex justify-center" 
+            />
+            {/* <h1 className="text-4xl md:text-5xl font-bold mb-6">Get in Touch</h1> */}
+            <motion.p 
+              className="text-xl max-w-3xl mx-auto"
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: heroInView ? 1 : 0, x: heroInView ? 0 : -100 }}
+              transition={{ duration: 2 }}
+              ref={heroRef}
+            >
               We'd love to hear from you. Let's create something amazing together.
-            </p>
+            </motion.p>
           </div>
         </div>
       </section>
@@ -64,7 +81,12 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Form */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -200 }}
+              animate={{ opacity: contactInView ? 1 : 0, x: contactInView ? 0 : -200 }}
+              transition={{ duration: 2 }}
+              ref={contactRef}
+            >
               <h2 className="text-3xl font-bold mb-8">Send Us a Message</h2>
               <form onSubmit={handleSubmit} ref={inputRef} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -141,10 +163,15 @@ const Contact = () => {
                   Send Message
                 </button>
               </form>
-            </div>
+            </motion.div>
 
             {/* Contact Information */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: contactInfoInView ? 1 : 0, x: contactInfoInView ? 0 : 100 }}
+              transition={{ duration: 2 }}
+              ref={contactInfoRef}
+            >
               <h2 className="text-3xl font-bold mb-8">Contact Information</h2>
               <div className="space-y-6">
                 <div className="flex items-start">
@@ -202,7 +229,7 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
