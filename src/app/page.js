@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, { useState } from 'react';
 import { Monitor, Users, Layout, Lightbulb, ArrowRight, Star } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -19,12 +19,58 @@ import SEO from './components/SEO';
 
 const Home = () => {
 
-  // const defaultOptions = {
-  //   loop: true,
-  //   autoplay: true,
-  //   animationData: animationData,
-  //   rendererSettings: {
-  //     preserveAspectRatio: 'xMidYMid slice',
+  const testimonials = [
+    {
+      quote: "Working with UI Mitra was a game-changer for our product. Their attention to detail and user-centric approach helped us create an exceptional experience for our customers.",
+      author: "Sarah Johnson",
+      role: "Product Manager",
+      company: "TechStart Inc."
+    },
+    {
+      quote: "The team's creativity and technical expertise are unmatched. They didn't just design our interface; they transformed our entire digital presence.",
+      author: "Michael Chen",
+      role: "CEO",
+      company: "Innovation Labs"
+    },
+    {
+      quote: "Professional, responsive, and incredibly talented. UI Mitra delivered beyond our expectations and helped us achieve our business goals.",
+      author: "Emily Rodriguez",
+      role: "Marketing Director",
+      company: "Global Solutions"
+    },
+    {
+      quote: "UI Mitra's design work is exceptional. They truly understand the needs of our users and have created a seamless experience.",
+      author: "David Lee",
+      role: "CTO",
+      company: "FinTech Solutions"
+    },
+    {
+      quote: "Their innovative approach to design has helped us stand out in a crowded market. We couldn't be happier with the results.",
+      author: "Jessica Brown",
+      role: "Marketing Manager",
+      company: "Creative Agency"
+    },
+    {
+      quote: "UI Mitra's team is incredibly talented and professional. They delivered beyond our expectations.",
+      author: "John Doe",
+      role: "CEO",
+      company: "Tech Innovators"
+    },
+    {
+      quote: "The design solutions provided by UI Mitra have significantly improved our user engagement.",
+      author: "Jane Smith",
+      role: "Product Owner",
+      company: "Digital Solutions"
+    }
+  ];
+
+  // const [ scrollPosition, setScrollPosition ] = useState(0);
+
+  // const handleScroll = (direction) => {
+  //   if (direction === 'left') {
+  //     setScrollPosition(scrollPosition - 200);
+  //   } else if (direction === 'right') {
+  //     setScrollPosition(scrollPosition + 200);
   //   }
   // };
 
@@ -280,7 +326,7 @@ const Home = () => {
         </section>
 
         {/* Testimonials */}
-        <section className="pt-20 pb-40 bg-gray-50 ">
+        <section className="pt-20 pb-40 bg-gray-50 relative">
           <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               className="text-center mb-16"
@@ -293,48 +339,33 @@ const Home = () => {
               <p className="text-xl text-gray-600">Don&apos;t just take our word for it</p>
             </motion.div>
             
-            <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-              initial={{ opacity: 0, y: -200 }}
-              animate={{ opacity: testimonialsInView ? 1 : 0, y: testimonialsInView ? 0 : -200 }}
-              transition={{ duration: 2 }}
-              ref={testimonialsRef}
-            >
-              {[
-                {
-                  quote: "Working with UI Mitra was a game-changer for our product. Their attention to detail and user-centric approach helped us create an exceptional experience for our customers.",
-                  author: "Sarah Johnson",
-                  role: "Product Manager",
-                  company: "TechStart Inc."
-                },
-                {
-                  quote: "The team's creativity and technical expertise are unmatched. They didn't just design our interface; they transformed our entire digital presence.",
-                  author: "Michael Chen",
-                  role: "CEO",
-                  company: "Innovation Labs"
-                },
-                {
-                  quote: "Professional, responsive, and incredibly talented. UI Mitra delivered beyond our expectations and helped us achieve our business goals.",
-                  author: "Emily Rodriguez",
-                  role: "Marketing Director",
-                  company: "Global Solutions"
-                }
-              ].map((testimonial, index) => (
-                <div key={index} className="bg-white p-8 rounded-lg shadow-lg">
-                  <div className="flex mb-4">
-                    {[...Array(5)].map((_, index) => (
-                      <Star key={index} className="h-5 w-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-6">{testimonial.quote}</p>
-                  <div>
-                    <p className="font-bold text-gray-900">{testimonial.author}</p>
-                    <p className="text-gray-600">{testimonial.role}</p>
-                    <p className="text-secondary">{testimonial.company}</p>
-                  </div>
-                </div>
-              ))}
-            </motion.div>
+            {/* <div className="flex overflow-x-scroll space-x-8 pb-4"> */}
+              <motion.div 
+                  // className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
+                  className="flex overflow-x-scroll space-x-8 pb-4"
+                  initial={{ opacity: 0, y: -200 }}
+                  animate={{ opacity: testimonialsInView ? 1 : 0, y: testimonialsInView ? 0 : -200 }}
+                  transition={{ duration: 2 }}
+                  ref={testimonialsRef}
+                >
+                {testimonials.map((testimonial, index) => (
+                    <div key={index} className="bg-white p-8 rounded-lg shadow-lg min-w-[300px] flex-hrink-0">
+                      <div className="flex mb-4">
+                        {[...Array(5)].map((_, index) => (
+                          <Star key={index} className="h-5 w-5 text-yellow-400 fill-current" />
+                        ))}
+                      </div>
+                      <p className="text-gray-600 mb-6">{testimonial.quote}</p>
+                      <div>
+                        <p className="font-bold text-gray-900">{testimonial.author}</p>
+                        <p className="text-gray-600">{testimonial.role}</p>
+                        <p className="text-secondary">{testimonial.company}</p>
+                      </div>
+                    </div>
+                  ))}
+              </motion.div>
+            {/* </div> */}
+                        
           </div>
 
           <motion.div 
@@ -360,7 +391,7 @@ const Home = () => {
             <motion.h2 
                 className="text-3xl md:text-4xl font-bold text-white mb-4"
                 initial={{ opacity: 0, y: 250 }}
-                animate={{ opacity: ctaInView ? 1 : 0, y: ctaInView ? 0 : -200 }}
+                animate={{ opacity: ctaInView ? 1 : 0, y: ctaInView ? 0 : 200 }}
                 transition={{ duration: 2 }}
                 ref={ctaRef}
               >
