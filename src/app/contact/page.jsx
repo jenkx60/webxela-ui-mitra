@@ -52,7 +52,13 @@ const Contact = () => {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-primary to-secondary text-white py-20">
         <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div 
+          className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          initial={{ opacity: 0, y: 200 }}
+          animate={{ opacity: heroInView ? 1 : 0, y: heroInView ? 0 : 150 }}
+          transition={{ duration: 2 }}
+          ref={heroRef}
+        >
           <div className="text-center">
             <BlurText
               text="Get in Touch!"
@@ -73,7 +79,7 @@ const Contact = () => {
               We'd love to hear from you. Let's create something amazing together.
             </motion.p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Contact Section */}
@@ -167,8 +173,8 @@ const Contact = () => {
 
             {/* Contact Information */}
             <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: contactInfoInView ? 1 : 0, x: contactInfoInView ? 0 : 100 }}
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: contactInfoInView ? 1 : 0, y: contactInfoInView ? 0 : 100 }}
               transition={{ duration: 2 }}
               ref={contactInfoRef}
             >
@@ -237,12 +243,24 @@ const Contact = () => {
       {/* FAQ Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 200 }}
+            animate={{ opacity: faqInView ? 1 : 0, y: faqInView ? 0 : 150 }}
+            transition={{ duration: 2 }}
+            ref={faqRef}
+          >
             <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
             <p className="text-gray-600">Find answers to common questions about our services</p>
-          </div>
+          </motion.div>
           <div className="max-w-3xl mx-auto">
-            <div className="space-y-6">
+            <motion.div 
+              className="space-y-6"
+              initial={{ opacity: 0, x: 200 }}
+              animate={{ opacity: faqInView ? 1 : 0, x: faqInView ? 0 : 150 }}
+              transition={{ duration: 2 }}
+              ref={faqRef}
+            >
               {[
                 {
                   question: "What is your typical process for new projects?",
@@ -262,7 +280,7 @@ const Contact = () => {
                   <p className="text-gray-600">{faq.answer}</p>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

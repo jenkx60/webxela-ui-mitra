@@ -16,23 +16,59 @@
 // export default NotFound;
 
 "use client"
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import SEO from './components/SEO';
+import animation from '../app/public/Animation.gif';
+import Image from 'next/image';
 
 const NotFoundPage = () => {
   const router = useRouter();
+  const [ isLoading, setIsLoading ] = useState(true);
 
   useEffect(() => {
+    const loadTimeout = setTimeout(() => {
+      setIsLoading(false)
+    }, [3000]);
+
     const timeout = setTimeout(() => {
       router.push('/');
-    }, 3000);
+    }, 6000);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(loadTimeout);
+      clearTimeout(timeout);
+    }
   }, [router]);
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-gray-900 text-center p-6">
+        <motion.h1
+          className="text-4xl font-bold text-gray-800 dark:text-white mb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Image
+            src={animation}
+            alt="Loading animation"
+            width={200}
+            height={200}
+          />
+        </motion.h1>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-gray-900 text-center p-6">
+      <SEO
+        title="Page Not Found - UI Mitra"
+        description="The page you are looking for does not exist. Please check the URL or return to the homepage."
+        keywords="404, Not Found, UI Mitra" 
+      />
       <motion.h1
         className="text-7xl font-bold text-gray-800 dark:text-white mb-4"
         initial={{ opacity: 0, y: -20 }}

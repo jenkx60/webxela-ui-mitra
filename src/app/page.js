@@ -13,6 +13,7 @@ import Particles from './components/Particles';
 // import SpotlightCard from './components/Spotlight';
 // import RotatingText from './components/TrueFocus';
 import TrueFocus from './components/TrueFocus';
+import SEO from './components/SEO';
 // import FallingText from './components/FallingText';
 // import Aurora from './components/Aurora';
 
@@ -47,6 +48,11 @@ const Home = () => {
   
   return (
       <div className="pt-16">
+        <SEO
+          title="UI Mitra - Crafting Exceptional User Experiences"
+          description="Where innovation meets design to create meaningful digital experiences that inspire an engage."
+          keywords="UI, UX, UI/UX, Design, Digital Experiences, Innovation."
+        />
         {/* Hero Section */}
         <section className="relative bg-gradient-to-r from-primary to-secondary text-white py-20 lg:py-32">
           <div className="absolute inset-0 bg-black opacity-50">
@@ -64,9 +70,9 @@ const Home = () => {
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 className='text-center'
-                initial={{ opacity: 0, y: -100 }}
+                initial={{ opacity: 0, y: 250 }}
                 // initial="initial"
-                animate={{ opacity: heroInView ? 1 : 0, y: heroInView ? 0 : -50 }}
+                animate={{ opacity: heroInView ? 1 : 0, y: heroInView ? 0 : 250 }}
                 // animate={heroInView ? "animate" : "initial"}
                 // variants={fadeInUp}
                 transition={{ duration: 2 }}
@@ -133,8 +139,8 @@ const Home = () => {
             >
               <motion.h2 
                 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
-                initial={{ opacity: 0, x: -150 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 350 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 2 }}
                 ref={servicesRef}
               >
@@ -143,8 +149,8 @@ const Home = () => {
 
               <motion.p 
                 className="text-xl text-gray-600"
-                initial={{ opacity: 0, x: 150 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 250 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 2 }}
                 ref={servicesRef}
               >
@@ -154,8 +160,8 @@ const Home = () => {
             
             <motion.div
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-              initial={{ opacity: 0, y: 200 }}
-              animate={{ opacity: servicesInView ? 1 : 0, y: servicesInView ? 0 : 200 }}
+              initial={{ opacity: 0, x: 200 }}
+              animate={{ opacity: servicesInView ? 1 : 0, x: servicesInView ? 0 : 200 }}
               transition={{ duration: 2 }}
               ref={servicesRef}
             >
@@ -205,8 +211,8 @@ const Home = () => {
             >
               <motion.h2 
                 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
-                initial={{ opacity: 0, y: -100 }}
-                animate={{ opacity: workInView ? 1 : 0, y: workInView ? 0 : -100 }}
+                initial={{ opacity: 0, y: 300 }}
+                animate={{ opacity: workInView ? 1 : 0, y: workInView ? 0 : 300 }}
                 transition={{ duration: 2 }}
                 ref={workRef}
               >
@@ -214,8 +220,8 @@ const Home = () => {
               </motion.h2>
               <motion.p 
                 className="text-xl text-gray-600"
-                initial={{ opacity: 0, x: -150 }}
-                animate={{ opacity: workInView ? 1 : 0, x: workInView ? 0 : -150 }}
+                initial={{ opacity: 0, y: 250 }}
+                animate={{ opacity: workInView ? 1 : 0, y: workInView ? 0 : 250 }}
                 transition={{ duration: 2 }}
                 ref={workRef}
               >
@@ -278,8 +284,8 @@ const Home = () => {
           <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               className="text-center mb-16"
-              initial={{ opacity: 0, x: -200 }}
-              animate={{ opacity: testimonialsInView ? 1 : 0, x: testimonialsInView ? 0 : -200 }}
+              initial={{ opacity: 0, y: 250 }}
+              animate={{ opacity: testimonialsInView ? 1 : 0, y: testimonialsInView ? 0 : 300 }}
               transition={{ duration: 2 }}
               ref={testimonialsRef}
             >
@@ -353,8 +359,8 @@ const Home = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.h2 
                 className="text-3xl md:text-4xl font-bold text-white mb-4"
-                initial={{ opacity: 0, x: -150 }}
-                animate={{ opacity: ctaInView ? 1 : 0, x: ctaInView ? 0 : -150 }}
+                initial={{ opacity: 0, y: 250 }}
+                animate={{ opacity: ctaInView ? 1 : 0, y: ctaInView ? 0 : -200 }}
                 transition={{ duration: 2 }}
                 ref={ctaRef}
               >
@@ -362,8 +368,8 @@ const Home = () => {
             </motion.h2>
             <motion.p 
                 className="text-xl text-indigo-100 mb-8"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: ctaInView ? 1 : 0, y: ctaInView ? 0 : 50 }}
+                initial={{ opacity: 0, y: 150 }}
+                animate={{ opacity: ctaInView ? 1 : 0, y: ctaInView ? 0 : 100 }}
                 transition={{ duration: 2 }}
                 ref={ctaRef}
               >

@@ -10,6 +10,9 @@ import design from '../public/design.jpeg';
 import ux from '../public/ux.jpeg';
 import Image from 'next/image';
 import SplitText from '../components/SplitText';
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -95,15 +98,32 @@ const Blog = () => {
     console.log('All animation complete')
   };
 
+  const { ref: blogRef, inView: blogInView } = useInView({ triggerOnce: false });
+  const { ref: categoryRef, inView: categoryInView } = useInView({ triggerOnce: false });
+  const { ref: postRef, inView: postInView } = useInView({ triggerOnce: false });
+  const { ref: ctanewsRef, inView: ctanewsInView } = useInView({ triggerOnce: false }); 
+
+
   const filteredPosts = activeCategory === 'all'
     ? blogPosts
     : blogPosts.filter(post => post.category === activeCategory);
 
   return (
     <div className="pt-16">
+      <SEO
+        title="Our Blog - UI Mitra"
+        description="Stay updated with the latest insights and trends in UI/UX design through our blog."
+        keywords="Blog, UI Mitra, UI, UX, Design, Digital Experiences" 
+      />
       {/* Blog Header */}
       <section className="bg-gradient-to-r from-primary to-secondary text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <motion.div 
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+          initial={{ opacity: 0, y: 200 }}
+          animate={{ opacity: blogInView ? 1 : 0, y: blogInView ? 0 : 150 }}
+          transition={{ duration: 2 }}
+          ref={blogRef}
+        >
           <SplitText
             text="Our Blog"
             className="text-4xl md:text-5xl font-bold text-center"
@@ -119,7 +139,7 @@ const Blog = () => {
           <p className="text-xl text-red-100 max-w-3xl mx-auto mt-6">
             Insights, trends, and thought leadership from the world of design
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* Category Filter */}
@@ -127,7 +147,11 @@ const Blog = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map(category => (
-              <button
+              <motion.button
+                initial={{ opacity: 0, x: 200 }}
+                animate={{ opacity: categoryInView ? 1 : 0, x: categoryInView ? 0 : 200 }}
+                transition={{ duration: 1 }}
+                ref={categoryRef}
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
                 className={`px-6 py-2 rounded-full transition-all duration-300 ${
@@ -137,7 +161,7 @@ const Blog = () => {
                 }`}
               >
                 {category.label}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -146,9 +170,14 @@ const Blog = () => {
       {/* Blog Posts Grid */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            initial={{ opacity: 0, x: 200 }}
+            animate={{ opacity: postInView ? 1 : 0, x: postInView ? 0 : 150 }}
+            transition={{ duration: 2 }}
+            ref={postRef}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPosts.map(post => (
-              <article key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <article key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-110 hover:bg-primary hover:text-white">
                 <div className="relative h-48 overflow-hidden">
                   <Image
                     src={post.image}
@@ -187,20 +216,38 @@ const Blog = () => {
                 </div>
               </article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Newsletter CTA */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <motion.h2 
+            initial={{ opacity: 0, y: 200 }}
+            animate={{ opacity: ctanewsInView ? 1 : 0, y: ctanewsInView ? 0 : 200 }}
+            transition={{ duration: 2 }}
+            ref={ctanewsRef}
+            className="text-3xl font-bold text-gray-900 mb-4"
+          >
             Subscribe to Our Newsletter
-          </h2>
-          <p className="text-xl text-gray-600 mb-8">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 200 }}
+            animate={{ opacity: ctanewsInView ? 1 : 0, y: ctanewsInView ? 0 : 200 }}
+            transition={{ duration: 2 }}
+            ref={ctanewsRef}
+            className="text-xl text-gray-600 mb-8"
+          >
             Get the latest insights and trends delivered straight to your inbox
-          </p>
-          <form className="max-w-md mx-auto flex gap-4">
+          </motion.p>
+          <motion.form 
+            initial={{ opacity: 0, x: 200 }}
+            animate={{ opacity: ctanewsInView ? 1 : 0, x: ctanewsInView ? 0 : 200 }}
+            transition={{ duration: 2 }}
+            ref={ctanewsRef}
+            className="max-w-md mx-auto flex gap-4"
+          >
             <input
               type="email"
               placeholder="Enter your email"
@@ -212,7 +259,7 @@ const Blog = () => {
             >
               Subscribe
             </button>
-          </form>
+          </motion.form>
         </div>
       </section>
     </div>

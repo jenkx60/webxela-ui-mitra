@@ -1,12 +1,3 @@
-// import React from 'react'
-
-// const page = () => {
-//   return (
-//     <div>page</div>
-//   )
-// }
-
-// export default page
 "use client"
 import React from 'react';
 import { Users, Heart, Zap, Target, Award, Smile } from 'lucide-react';
@@ -19,6 +10,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import TiltedCard from '../components/TiltedCard';
 import CountUp from '../components/CountUp';
+import SEO from '../components/SEO';
 
 const About = () => {
   const coreValues = [
@@ -76,14 +68,19 @@ const About = () => {
 
   return (
     <div className="pt-16">
+      <SEO
+        title="About Us - UI Mitra"
+        description="Learn more about UI Mitra and our mission to create exceptional user experiences."
+        keywords="About, UI Mitra, User Experiences, UI, UX, Design" 
+      />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-primary to-secondary text-white py-20">
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="text-center"
-            initial={{ opacity: 0, y: -100 }}
-            animate={{ opacity: heroInView ? 1 : 0, y: heroInView ? 0 : -50 }}
+            initial={{ opacity: 0, y: 150 }}
+            animate={{ opacity: heroInView ? 1 : 0, y: heroInView ? 0 : 100 }}
             transition={{ duration: 2 }}
             ref={heroRef}
           >
@@ -100,8 +97,8 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -150 }}
-              animate={{ opacity: introInView ? 1 : 0, x: introInView ? 0 : -150 }}
+              initial={{ opacity: 0, y: 200 }}
+              animate={{ opacity: introInView ? 1 : 0, y: introInView ? 0 : 150 }}
               transition={{ duration: 2 }}
               ref={introRef}
             >
@@ -136,8 +133,8 @@ const About = () => {
           <div className="text-center mb-16">
             <motion.h2 
               className="text-3xl font-bold mb-4"
-              initial={{ opacity: 0, x: -150 }}
-              animate={{ opacity: coreInView ? 1 : 0, x: coreInView ? 0 : -150 }}
+              initial={{ opacity: 0, y: 200 }}
+              animate={{ opacity: coreInView ? 1 : 0, y: coreInView ? 0 : 150 }}
               transition={{ duration: 2 }}
               ref={coreRef}
             >
@@ -145,8 +142,8 @@ const About = () => {
             </motion.h2>
             <motion.p 
               className="text-xl text-gray-600"
-              initial={{ opacity: 0, x: 150 }}
-              animate={{ opacity: coreInView ? 1 : 0, x: coreInView ? 0 : 150 }}
+              initial={{ opacity: 0, y: 200 }}
+              animate={{ opacity: coreInView ? 1 : 0, y: coreInView ? 0 : 150 }}
               transition={{ duration: 2 }}
               ref={coreRef}
             >
@@ -155,8 +152,8 @@ const About = () => {
           </div>
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            initial={{ opacity: 0, y: 150 }}
-            animate={{ opacity: coreInView ? 1 : 0, y: coreInView ? 0 : 150 }}
+            initial={{ opacity: 0, x: 150 }}
+            animate={{ opacity: coreInView ? 1 : 0, x: coreInView ? 0 : 150 }}
             transition={{ duration: 2 }}
             ref={coreRef}
           >
@@ -179,13 +176,26 @@ const About = () => {
       {/* Team Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 200 }}
+            animate={{ opacity: teamInView ? 1 : 0, y: teamInView ? 0 : 150 }}
+            transition={{ duration: 2 }}
+            ref={teamRef}
+          >
             <h2 className="text-3xl font-bold mb-4">Meet Our Team</h2>
             <p className="text-xl text-gray-600">The creative minds behind our success</p>
-          </div>
+          </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <motion.div 
+                key={index} 
+                className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-110 hover:bg-primary hover:text-white"
+                initial={{ opacity: 0, x: -150 }}
+                animate={{ opacity: teamInView ? 1 : 0, x: teamInView ? 0 : 100 }}
+                transition={{ duration: 2 }}
+                ref={teamRef}
+              >
                 <Image
                   src={member.image}
                   alt={member.name}
@@ -217,7 +227,7 @@ const About = () => {
                   <p className="text-secondary mb-4">{member.role}</p>
                   <p className="text-gray-600 italic">"{member.quote}"</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -251,8 +261,8 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h2 
             className="text-3xl font-bold mb-8"
-            initial={{ opacity: 0, x: 150 }}
-            animate={{ opacity: ctaInView ? 1 : 0, x: ctaInView ? 0 : 150}}
+            initial={{ opacity: 0, y: 200 }}
+            animate={{ opacity: ctaInView ? 1 : 0, y: ctaInView ? 0 : 150}}
             transition={{ duration: 2 }}
             ref={ctaRef}
           >

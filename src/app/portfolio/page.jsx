@@ -10,6 +10,9 @@ import social from '../public/social-plat.jpeg';
 import fitness from '../public/fitness.jpeg';
 import Image from 'next/image';
 import SplitText from '../components/SplitText';
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -98,6 +101,13 @@ const Portfolio = () => {
     }
   ];
 
+  const { ref: portfolioRef, inView: portfolioInView } = useInView({ triggerOnce: false });
+  const { ref: filterRef, inView: filterInView } = useInView({ triggerOnce: false });
+  const { ref: projectRef, inView: projectInView } = useInView({ triggerOnce: false });
+  const { ref: filteredProjectsRef, inView: filteredProjectsInView } = useInView({ trackVisibility: false });
+  const { ref: caseStudyRef, inView: caseStudyInView } = useInView({ triggerOnce: false });
+  const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: false }); 
+
   const handleAnimationComplete = () => {
     console.log('All letter are animated')
   }
@@ -108,9 +118,20 @@ const Portfolio = () => {
 
   return (
     <div className="pt-16">
+      <SEO
+        title="Our Portfolio - UI Mitra"
+        description="Explore our portfolio to see the exceptional digital experiences we've crafted for our clientts."
+        keywords="Portfolio, UI Mitra, UI, UX, Design, Digital Experiences" 
+      />
       {/* Portfolio Header */}
       <section className="bg-gradient-to-r from-primary to-secondary text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <motion.div 
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+          initial={{ opacity: 0, y: 200 }}
+          animate={{ opacity: portfolioInView ? 1 : 0, y: portfolioInView ? 0 : 150 }}
+          transition={{ duration: 2 }}
+          ref={portfolioRef}
+        >
           <SplitText
             text="Our Portfolio"
             className="text-4xl md:text-5xl font-bold text-center"
@@ -126,7 +147,7 @@ const Portfolio = () => {
           <p className="text-xl text-red-100 max-w-3xl mx-auto mt-6">
             Explore our latest work and see how we've helped businesses transform their digital presence
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* Filter Section */}
@@ -134,7 +155,11 @@ const Portfolio = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-4">
             {filters.map(filter => (
-              <button
+              <motion.button
+                initial={{ opacity: 0, x: 200 }}
+                animate={{ opacity: filterInView ? 1 : 0, x: filterInView ? 0 : 200 }}
+                transition={{ duration: 1 }}
+                ref={filterRef}
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
                 className={`px-6 py-2 rounded-full transition-all duration-300 ${
@@ -144,7 +169,7 @@ const Portfolio = () => {
                 }`}
               >
                 {filter.label}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -153,9 +178,18 @@ const Portfolio = () => {
       {/* Project Gallery */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            initial={{ opacity: 0, x: 200 }}
+            animate={{ opacity: projectInView ? 1 : 0, x: projectInView ? 0 : 200 }}
+            transition={{ duration: 2 }}
+            ref={projectRef}
+          >
             {filteredProjects.map(project => (
-              <div key={project.id} className="group relative overflow-hidden rounded-lg shadow-lg bg-white">
+              <div 
+                key={project.id} 
+                className="group relative overflow-hidden rounded-lg shadow-lg bg-white transform hover:scale-110 hover:bg-primary hover:text-white"
+              >
                 <div className="relative h-64 overflow-hidden">
                   <Image
                     src={project.image}
@@ -185,17 +219,31 @@ const Portfolio = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Featured Case Studies */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Featured Case Studies</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <motion.h2 
+            className="text-3xl font-bold text-center mb-12"
+            initial={{ opacity: 0, y: 200 }}
+            animate={{ opacity: caseStudyInView ? 1 : 0, y: caseStudyInView ? 0 : 150 }}
+            transition={{ duration: 2 }}
+            ref={caseStudyRef}
+          >
+            Featured Case Studies
+          </motion.h2>
+          <motion.div 
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+            initial={{ opacity: 0, x: 200 }}
+            whileInView={{ opacity: caseStudyInView ? 1 : 0, x: caseStudyInView ? 0 : 200 }}
+            transition={{ duration: 2 }}
+            ref={caseStudyRef}
+          >
             {featuredCaseStudies.map((study, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-110 hover:bg-primary hover:text-white">
                 <div className="h-64 overflow-hidden">
                   <Image
                     src={study.image}
@@ -226,19 +274,31 @@ const Portfolio = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold text-white mb-4"
+            initial={{ opacity: 0, y: 200 }}
+            animate={{ opacity: ctaInView ? 1 : 0, y: ctaInView ? 0 : 200 }}
+            transition={{ duration: 2 }}
+            ref={ctaRef}
+          >
             Have a Project in Mind?
-          </h2>
-          <p className="text-xl text-indigo-100 mb-8">
+          </motion.h2>
+          <motion.p 
+            className="text-xl text-indigo-100 mb-8"
+            initial={{ opacity: 0, y: 200 }}
+            animate={{ opacity: ctaInView ? 1 : 0, y: ctaInView ? 0 : 200 }}
+            transition={{ duration: 2 }}
+            ref={ctaRef}
+          >
             Let's create something amazing together
-          </p>
+          </motion.p>
           <Link
             href="/contact"
             // className="inline-block bg-white text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300"
