@@ -92,7 +92,8 @@ const Services = () => {
               showBorder={false}
               className="custom-class"
             >
-              <SplitText
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Expertise in UI/UX Design</h1>
+              {/* <SplitText
                 text="Our Expertise in UI/UX Design"
                 className="text-4xl md:text-5xl font-bold text-center"
                 delay={100}
@@ -102,10 +103,9 @@ const Services = () => {
                 threshold={0.3}
                 rootMargin="-50px"
                 onLetterAnimationComplete={handleAnimationComplete} 
-              />
+              /> */}
             </GradientText>
             
-            {/* <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Expertise in UI/UX Design</h1> */}
             <p className="text-xl max-w-3xl mx-auto mt-6">
               We offer end-to-end design solutions to elevate your user experience and transform your digital presence.
             </p>

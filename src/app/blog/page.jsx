@@ -132,7 +132,8 @@ const Blog = () => {
             showBorder={false}
             className="custom-class"
           >
-            <SplitText
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Blog</h1>
+            {/* <SplitText
               text="Our Blog"
               className="text-4xl md:text-5xl font-bold text-center"
               delay={200}
@@ -142,10 +143,9 @@ const Blog = () => {
               threshold={0.3}
               rootMargin="-50px"
               onLetterAnimationComplete={handleAnimationComplete} 
-            />
+            /> */}
           </GradientText>
           
-          {/* <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Blog</h1> */}
           <p className="text-xl text-red-100 max-w-3xl mx-auto mt-6">
             Insights, trends, and thought leadership from the world of design
           </p>

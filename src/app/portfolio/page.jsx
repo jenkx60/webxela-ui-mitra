@@ -140,7 +140,8 @@ const Portfolio = () => {
             showBorder={false}
             className="custom-class"
           >
-            <SplitText
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Portfolio</h1>
+            {/* <SplitText
               text="Our Portfolio"
               className="text-4xl md:text-5xl font-bold text-center"
               delay={200}
@@ -150,10 +151,10 @@ const Portfolio = () => {
               threshold={0.3}
               rootMargin="-50px"
               onLetterAnimationComplete={handleAnimationComplete} 
-            />
+            /> */}
           </GradientText>
           
-          {/* <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Portfolio</h1> */}
+          
           <p className="text-xl text-red-100 max-w-3xl mx-auto mt-6">
             Explore our latest work and see how we've helped businesses transform their digital presence
           </p>

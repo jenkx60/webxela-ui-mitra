@@ -14,7 +14,7 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 
-const Contact = () => {
+const contact = () => {
   const [ formData, setFormData ] = useState({ firstname: "", lastname: "", email: "", subject: "", message: "" });
   const inputRef = useRef(null);
 
@@ -69,17 +69,17 @@ const Contact = () => {
               showBorder={false}
               className="custom-class"
             >
-              <BlurText
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">Get in Touch</h1>
+              {/* <BlurText
                 text="Get in Touch!"
                 delay={100}
                 animateBy="letter"
                 direction="top"
                 onAnimationComplete={handleAnimationComplete}
                 className="text-4xl md:text-5xl font-bold mb-6 text-center flex justify-center" 
-              />
+              /> */}
             </GradientText>
             
-            {/* <h1 className="text-4xl md:text-5xl font-bold mb-6">Get in Touch</h1> */}
             <motion.p 
               className="text-xl max-w-3xl mx-auto"
               initial={{ opacity: 0, x: -100 }}
@@ -301,7 +301,7 @@ const Contact = () => {
         </div>
       </section>
     </div>
-  );
+  )
 };
 
-export default Contact;
+export default contact;
