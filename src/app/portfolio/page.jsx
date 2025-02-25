@@ -13,6 +13,8 @@ import SplitText from '../components/SplitText';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
+import GradientText from '../components/GradientText';
+import SpotlightCard from '../components/Spotlight';
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -101,12 +103,12 @@ const Portfolio = () => {
     }
   ];
 
-  const { ref: portfolioRef, inView: portfolioInView } = useInView({ triggerOnce: false });
-  const { ref: filterRef, inView: filterInView } = useInView({ triggerOnce: false });
-  const { ref: projectRef, inView: projectInView } = useInView({ triggerOnce: false });
-  const { ref: filteredProjectsRef, inView: filteredProjectsInView } = useInView({ trackVisibility: false });
-  const { ref: caseStudyRef, inView: caseStudyInView } = useInView({ triggerOnce: false });
-  const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: false }); 
+  const { ref: portfolioRef, inView: portfolioInView } = useInView({ triggerOnce: true });
+  const { ref: filterRef, inView: filterInView } = useInView({ triggerOnce: true });
+  const { ref: projectRef, inView: projectInView } = useInView({ triggerOnce: true });
+  const { ref: filteredProjectsRef, inView: filteredProjectsInView } = useInView({ trackVisibility: true });
+  const { ref: caseStudyRef, inView: caseStudyInView } = useInView({ triggerOnce: true });
+  const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: true }); 
 
   const handleAnimationComplete = () => {
     console.log('All letter are animated')
@@ -132,17 +134,25 @@ const Portfolio = () => {
           transition={{ duration: 2 }}
           ref={portfolioRef}
         >
-          <SplitText
-            text="Our Portfolio"
-            className="text-4xl md:text-5xl font-bold text-center"
-            delay={200}
-            animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
-            animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
-            easing="easeOutCubic"
-            threshold={0.3}
-            rootMargin="-50px"
-            onLetterAnimationComplete={handleAnimationComplete} 
-          />
+          <GradientText
+            colors={['#ED184F', "#4079ff", '#ED184F', "#4079ff", '#ED184F']}
+            animationSpeed={3}
+            showBorder={false}
+            className="custom-class"
+          >
+            <SplitText
+              text="Our Portfolio"
+              className="text-4xl md:text-5xl font-bold text-center"
+              delay={200}
+              animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+              animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+              easing="easeOutCubic"
+              threshold={0.3}
+              rootMargin="-50px"
+              onLetterAnimationComplete={handleAnimationComplete} 
+            />
+          </GradientText>
+          
           {/* <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Portfolio</h1> */}
           <p className="text-xl text-red-100 max-w-3xl mx-auto mt-6">
             Explore our latest work and see how we've helped businesses transform their digital presence
@@ -151,7 +161,7 @@ const Portfolio = () => {
       </section>
 
       {/* Filter Section */}
-      <section className="py-8 bg-gray-50">
+      <section className="py-8 bg-gradient-to-tr from-primary to-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-4">
             {filters.map(filter => (
@@ -165,7 +175,7 @@ const Portfolio = () => {
                 className={`px-6 py-2 rounded-full transition-all duration-300 ${
                   activeFilter === filter.id
                     ? 'bg-secondary text-white'
-                    : 'bg-white text-gray-600 hover:bg-red-50'
+                    : 'bg-white text-gray-600 hover:bg-red-300'
                 }`}
               >
                 {filter.label}
@@ -176,7 +186,7 @@ const Portfolio = () => {
       </section>
 
       {/* Project Gallery */}
-      <section className="py-16">
+      <section className="py-16 bg-gradient-to-br from-primary to-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -200,23 +210,28 @@ const Portfolio = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <div className="p-6">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1 bg-red-50 text-secondary rounded-full text-sm">
-                        {tag}
-                      </span>
-                    ))}
+                <SpotlightCard  
+                  className='custom-spotlight-card' spotlightColor='#ED184F'
+                >
+                  <div className="p-6">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags.map(tag => (
+                        <span key={tag} className="px-3 py-1 bg-red-50 text-secondary rounded-full text-sm">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                    <p className="text-gray-600 mb-4">{project.description}</p>
+                    <Link
+                      href={`/case-study/${project.id}`}
+                      className="inline-flex items-center text-secondary hover:text-secondary font-medium"
+                    >
+                      View Case Study <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
-                  <Link
-                    href={`/case-study/${project.id}`}
-                    className="inline-flex items-center text-secondary hover:text-secondary font-medium"
-                  >
-                    View Case Study <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </div>
+                </SpotlightCard>
+                
               </div>
             ))}
           </motion.div>

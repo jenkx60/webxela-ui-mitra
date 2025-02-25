@@ -11,6 +11,7 @@ import { useInView } from 'react-intersection-observer';
 import TiltedCard from '../components/TiltedCard';
 import CountUp from '../components/CountUp';
 import SEO from '../components/SEO';
+import GradientText from '../components/GradientText';
 
 const About = () => {
   const coreValues = [
@@ -59,12 +60,12 @@ const About = () => {
     { number: "15+", label: "Design Awards" }
   ];
 
-  const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: false });
-  const { ref: introRef, inView: introInView } = useInView({ triggerOnce: false });
-  const { ref: coreRef, inView: coreInView } = useInView({ triggerOnce: false });
-  const { ref: teamRef, inView: teamInView } = useInView({ triggerOnce: false });
-  const { ref: achievementRef, inView: achievementInView } = useInView({ triggerOnce: false });
-  const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: false });
+  const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true });
+  const { ref: introRef, inView: introInView } = useInView({ triggerOnce: true });
+  const { ref: coreRef, inView: coreInView } = useInView({ triggerOnce: true });
+  const { ref: teamRef, inView: teamInView } = useInView({ triggerOnce: true });
+  const { ref: achievementRef, inView: achievementInView } = useInView({ triggerOnce: true });
+  const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: true });
 
   return (
     <div className="pt-16">
@@ -84,7 +85,15 @@ const About = () => {
             transition={{ duration: 2 }}
             ref={heroRef}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Story: Where Friendship Meets Growth</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-3">Our Story:</h1>
+            <GradientText
+              colors={['#ED184F', "#4079ff", '#ED184F', "#4079ff", '#ED184F']}
+              animationSpeed={8}
+              showBorder={false}
+              className="custom-class"
+            >
+              <h1 className='text-4xl md:text-5xl font-bold mb-6'> Where Friendship Meets Growth</h1>
+            </GradientText>
             <p className="text-xl max-w-3xl mx-auto">
               We're more than just a design agency – we're a community of passionate creators dedicated to crafting exceptional digital experiences.
             </p>
@@ -93,7 +102,7 @@ const About = () => {
       </section>
 
       {/* Introduction */}
-      <section className="py-20">
+      <section className="py-20 bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -102,11 +111,19 @@ const About = () => {
               transition={{ duration: 2 }}
               ref={introRef}
             >
-              <h2 className="text-3xl font-bold mb-6">Who We Are</h2>
-              <p className="text-gray-600 mb-6">
+              {/* <GradientText
+                colors={['#ED184F', "#4079ff", '#ED184F', "#4079ff", '#ED184F']}
+                animationSpeed={3}
+                showBorder={false}
+                className="custom-class"
+              >
+                <p className='bg-transparent text-xl'>Welcome to UI Mitra</p>
+              </GradientText> */}
+              <h2 className="text-3xl font-bold mb-6 text-gray-100">Who We Are</h2>
+              <p className="text-gray-400 mb-6">
                 Founded in 2018, UI Mitra has grown from a small team of passionate designers to a full-service UI/UX design agency. Our journey is built on the foundation of collaboration, innovation, and continuous growth.
               </p>
-              <p className="text-gray-600">
+              <p className="text-gray-400">
                 We believe that great design has the power to transform businesses and enhance people's lives. Our community-driven approach ensures that we not only deliver exceptional results but also foster lasting relationships with our clients.
               </p>
             </motion.div>
@@ -128,11 +145,11 @@ const About = () => {
       </section>
 
       {/* Core Values */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2 
-              className="text-3xl font-bold mb-4"
+              className="text-3xl font-bold mb-4 text-gray-200"
               initial={{ opacity: 0, y: 200 }}
               animate={{ opacity: coreInView ? 1 : 0, y: coreInView ? 0 : 150 }}
               transition={{ duration: 2 }}
@@ -174,7 +191,7 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-20">
+      <section className="py-20 bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="text-center mb-16"
@@ -183,14 +200,14 @@ const About = () => {
             transition={{ duration: 2 }}
             ref={teamRef}
           >
-            <h2 className="text-3xl font-bold mb-4">Meet Our Team</h2>
-            <p className="text-xl text-gray-600">The creative minds behind our success</p>
+            <h2 className="text-3xl font-bold mb-4 text-gray-200">Meet Our Team</h2>
+            <p className="text-xl text-gray-400">The creative minds behind our success</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
               <motion.div 
                 key={index} 
-                className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-110 hover:bg-primary hover:text-white"
+                className="bg-white rounded-lg shadow-lg overflow-hidden transition hover:scale-110 hover:bg-secondary hover:text-white"
                 initial={{ opacity: 0, x: -150 }}
                 animate={{ opacity: teamInView ? 1 : 0, x: teamInView ? 0 : 100 }}
                 transition={{ duration: 2 }}
@@ -222,9 +239,16 @@ const About = () => {
                     </p>
                   }
                 /> */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{member.name}</h3>
-                  <p className="text-secondary mb-4">{member.role}</p>
+                <div className="p-6 flex flex-col justify-center place-items-center align-middle">
+                  <GradientText
+                    colors={['#ED184F', "#4079ff", '#ED184F', "#4079ff", '#ED184F']}
+                    animationSpeed={3}
+                    showBorder={false}
+                    className="custom-class"
+                  >
+                    <h3 className="text-xl font-bold mb-2">{member.name}</h3>
+                  </GradientText>
+                  <p className="mb-4">{member.role}</p>
                   <p className="text-gray-600 italic">"{member.quote}"</p>
                 </div>
               </motion.div>
@@ -234,7 +258,7 @@ const About = () => {
       </section>
 
       {/* Achievements */}
-      <section className="py-20 bg-primary text-white">
+      <section className="py-20 bg-secondary text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {achievements.map((achievement, index) => (

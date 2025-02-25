@@ -14,6 +14,7 @@ import Particles from './components/Particles';
 // import RotatingText from './components/TrueFocus';
 import TrueFocus from './components/TrueFocus';
 import SEO from './components/SEO';
+import SpotlightCard from './components/Spotlight';
 // import FallingText from './components/FallingText';
 // import Aurora from './components/Aurora';
 
@@ -74,11 +75,11 @@ const Home = () => {
   //   }
   // };
 
-  const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: false });
-  const { ref: servicesRef, inView: servicesInView } = useInView({ triggerOnce: false });
-  const { ref: workRef, inView: workInView } = useInView({ triggerOnce: false });
-  const { ref: testimonialsRef, inView: testimonialsInView } = useInView({ triggerOnce: false });
-  const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: false })
+  const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true });
+  const { ref: servicesRef, inView: servicesInView } = useInView({ triggerOnce: true });
+  const { ref: workRef, inView: workInView } = useInView({ triggerOnce: true });
+  const { ref: testimonialsRef, inView: testimonialsInView } = useInView({ triggerOnce: true });
+  const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: true })
 
   const fadeInUp = {
     initial: { opacity: 0, y: 100 },
@@ -93,7 +94,7 @@ const Home = () => {
   };
   
   return (
-      <div className="pt-16">
+      <div className="pt-16 bg-primary">
         <SEO
           title="UI Mitra - Crafting Exceptional User Experiences"
           description="Where innovation meets design to create meaningful digital experiences that inspire an engage."
@@ -171,7 +172,7 @@ const Home = () => {
         </section>
 
         {/* Services Section */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-primary">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               className='text-center mb-16'
@@ -184,7 +185,7 @@ const Home = () => {
               ref={servicesRef}
             >
               <motion.h2 
-                className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                className="text-3xl md:text-4xl font-bold text-gray-300 mb-4"
                 initial={{ opacity: 0, y: 350 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 2 }}
@@ -194,7 +195,7 @@ const Home = () => {
               </motion.h2>
 
               <motion.p 
-                className="text-xl text-gray-600"
+                className="text-xl text-gray-300"
                 initial={{ opacity: 0, y: 250 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 2 }}
@@ -256,7 +257,7 @@ const Home = () => {
               ref={workRef}
             >
               <motion.h2 
-                className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                className="text-3xl md:text-4xl font-bold text-gray-300 mb-4"
                 initial={{ opacity: 0, y: 300 }}
                 animate={{ opacity: workInView ? 1 : 0, y: workInView ? 0 : 300 }}
                 transition={{ duration: 2 }}
@@ -265,7 +266,7 @@ const Home = () => {
                 Featured Work
               </motion.h2>
               <motion.p 
-                className="text-xl text-gray-600"
+                className="text-xl text-gray-300"
                 initial={{ opacity: 0, y: 250 }}
                 animate={{ opacity: workInView ? 1 : 0, y: workInView ? 0 : 250 }}
                 transition={{ duration: 2 }}
@@ -326,7 +327,7 @@ const Home = () => {
         </section>
 
         {/* Testimonials */}
-        <section className="pt-20 pb-40 bg-gray-50 relative">
+        <section className="pt-20 pb-40 bg-primary relative">
           <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               className="text-center mb-16"
@@ -335,32 +336,32 @@ const Home = () => {
               transition={{ duration: 2 }}
               ref={testimonialsRef}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
-              <p className="text-xl text-gray-600">Don&apos;t just take our word for it</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-300 mb-4">What Our Clients Say</h2>
+              <p className="text-xl text-gray-300">Don&apos;t just take our word for it</p>
             </motion.div>
             
             {/* <div className="flex overflow-x-scroll space-x-8 pb-4"> */}
               <motion.div 
                   // className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
-                  className="flex overflow-x-scroll space-x-8 pb-4"
+                  className="flex overflow-x-scroll stacked-fractions space-x-8 pb-14 px-5"
                   initial={{ opacity: 0, y: -200 }}
                   animate={{ opacity: testimonialsInView ? 1 : 0, y: testimonialsInView ? 0 : -200 }}
                   transition={{ duration: 2 }}
                   ref={testimonialsRef}
                 >
                 {testimonials.map((testimonial, index) => (
-                    <div key={index} className="bg-white p-8 rounded-lg shadow-lg min-w-[300px] flex-hrink-0">
-                      <div className="flex mb-4">
-                        {[...Array(5)].map((_, index) => (
-                          <Star key={index} className="h-5 w-5 text-yellow-400 fill-current" />
-                        ))}
-                      </div>
-                      <p className="text-gray-600 mb-6">{testimonial.quote}</p>
-                      <div>
-                        <p className="font-bold text-gray-900">{testimonial.author}</p>
-                        <p className="text-gray-600">{testimonial.role}</p>
-                        <p className="text-secondary">{testimonial.company}</p>
-                      </div>
+                    <div key={index} className="bg-primary p-8 rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-secondary hover:scale-100 transition duration-300 min-w-[300px] flex-shrink border-2 border-secondary">
+                        <div className="flex mb-4">
+                          {[...Array(5)].map((_, index) => (
+                            <Star key={index} className="h-5 w-5 text-yellow-400 fill-current" />
+                          ))}
+                        </div>
+                        <p className="text-gray-400 mb-6">{testimonial.quote}</p>
+                        <div>
+                          <p className="font-bold text-gray-200">{testimonial.author}</p>
+                          <p className="text-gray-300">{testimonial.role}</p>
+                          <p className="text-secondary">{testimonial.company}</p>
+                        </div>
                     </div>
                   ))}
               </motion.div>

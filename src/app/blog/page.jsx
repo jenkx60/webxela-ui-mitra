@@ -13,6 +13,8 @@ import SplitText from '../components/SplitText';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
+import SpotlightCard from '../components/Spotlight';
+import GradientText from '../components/GradientText';
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -98,10 +100,10 @@ const Blog = () => {
     console.log('All animation complete')
   };
 
-  const { ref: blogRef, inView: blogInView } = useInView({ triggerOnce: false });
-  const { ref: categoryRef, inView: categoryInView } = useInView({ triggerOnce: false });
-  const { ref: postRef, inView: postInView } = useInView({ triggerOnce: false });
-  const { ref: ctanewsRef, inView: ctanewsInView } = useInView({ triggerOnce: false }); 
+  const { ref: blogRef, inView: blogInView } = useInView({ triggerOnce: true });
+  const { ref: categoryRef, inView: categoryInView } = useInView({ triggerOnce: true });
+  const { ref: postRef, inView: postInView } = useInView({ triggerOnce: true });
+  const { ref: ctanewsRef, inView: ctanewsInView } = useInView({ triggerOnce: true }); 
 
 
   const filteredPosts = activeCategory === 'all'
@@ -124,17 +126,25 @@ const Blog = () => {
           transition={{ duration: 2 }}
           ref={blogRef}
         >
-          <SplitText
-            text="Our Blog"
-            className="text-4xl md:text-5xl font-bold text-center"
-            delay={200}
-            animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
-            animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
-            easing="easeOutCubic"
-            threshold={0.3}
-            rootMargin="-50px"
-            onLetterAnimationComplete={handleAnimationComplete} 
-          />
+          <GradientText
+            colors={['#ED184F', "#4079ff", '#ED184F', "#4079ff", '#ED184F']}
+            animationSpeed={3}
+            showBorder={false}
+            className="custom-class"
+          >
+            <SplitText
+              text="Our Blog"
+              className="text-4xl md:text-5xl font-bold text-center"
+              delay={200}
+              animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+              animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+              easing="easeOutCubic"
+              threshold={0.3}
+              rootMargin="-50px"
+              onLetterAnimationComplete={handleAnimationComplete} 
+            />
+          </GradientText>
+          
           {/* <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Blog</h1> */}
           <p className="text-xl text-red-100 max-w-3xl mx-auto mt-6">
             Insights, trends, and thought leadership from the world of design
@@ -143,7 +153,7 @@ const Blog = () => {
       </section>
 
       {/* Category Filter */}
-      <section className="py-8 bg-gray-50">
+      <section className="py-8 bg-gradient-to-tr from-primary to-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map(category => (
@@ -157,7 +167,7 @@ const Blog = () => {
                 className={`px-6 py-2 rounded-full transition-all duration-300 ${
                   activeCategory === category.id
                     ? 'bg-secondary text-white'
-                    : 'bg-white text-gray-600 hover:bg-red-50'
+                    : 'bg-white text-gray-600 hover:bg-red-300'
                 }`}
               >
                 {category.label}
@@ -168,7 +178,7 @@ const Blog = () => {
       </section>
 
       {/* Blog Posts Grid */}
-      <section className="py-16">
+      <section className="py-16 bg-gradient-to-br from-primary to-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, x: 200 }}
@@ -187,33 +197,38 @@ const Blog = () => {
                     height={300}
                   />
                 </div>
-                <div className="p-6">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {post.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1 bg-red-50 text-secondary rounded-full text-sm">
-                        {tag}
-                      </span>
-                    ))}
+                <SpotlightCard
+                  className='custom-spotlight-card' spotlightColor='#ED184F'
+                >
+                  <div className="p-6">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {post.tags.map(tag => (
+                        <span key={tag} className="px-3 py-1 bg-red-50 text-secondary rounded-full text-sm">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <h2 className="text-xl font-bold mb-3 hover:text-secondary transition duration-300">
+                      <Link href={`/blog/${post.id}`}>{post.title}</Link>
+                    </h2>
+                    <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                    <div className="flex items-center text-sm text-gray-500 mb-4">
+                      <User className="h-4 w-4 mr-1" />
+                      <span className="mr-4">{post.author}</span>
+                      <Calendar className="h-4 w-4 mr-1" />
+                      <span className="mr-4">{post.date}</span>
+                      <Clock className="h-4 w-4 mr-1" />
+                      <span>{post.readTime}</span>
+                    </div>
+                    <Link
+                      href={`/blog/${post.id}`}
+                      className="inline-flex items-center text-secondary hover:text-red-700 font-medium"
+                    >
+                      Read More <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
                   </div>
-                  <h2 className="text-xl font-bold mb-3 hover:text-secondary transition duration-300">
-                    <Link href={`/blog/${post.id}`}>{post.title}</Link>
-                  </h2>
-                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                  <div className="flex items-center text-sm text-gray-500 mb-4">
-                    <User className="h-4 w-4 mr-1" />
-                    <span className="mr-4">{post.author}</span>
-                    <Calendar className="h-4 w-4 mr-1" />
-                    <span className="mr-4">{post.date}</span>
-                    <Clock className="h-4 w-4 mr-1" />
-                    <span>{post.readTime}</span>
-                  </div>
-                  <Link
-                    href={`/blog/${post.id}`}
-                    className="inline-flex items-center text-secondary hover:text-red-700 font-medium"
-                  >
-                    Read More <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </div>
+                </SpotlightCard>
+                
               </article>
             ))}
           </motion.div>

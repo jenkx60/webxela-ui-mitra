@@ -5,6 +5,8 @@ import SplitText from '../components/SplitText';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
+import GradientText from '../components/GradientText';
+import SpotlightCard from '../components/Spotlight';
 
 const Services = () => {
   const services = [
@@ -61,10 +63,10 @@ const Services = () => {
     console.log('All letter are animated')
   }
 
-    const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: false });
-    const { ref: servicesRef, inView: servicesInView } = useInView({ triggerOnce: false });
-    const { ref: processRef, inView: processInView } = useInView({ triggerOnce: false });
-    const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: false })
+    const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true });
+    const { ref: servicesRef, inView: servicesInView } = useInView({ triggerOnce: true });
+    const { ref: processRef, inView: processInView } = useInView({ triggerOnce: true });
+    const { ref: ctaRef, inView: ctaInView } = useInView({ triggerOnce: true })
   
   return (
     <div className="pt-16">
@@ -84,17 +86,25 @@ const Services = () => {
             transition={{ duration: 2 }}
             ref={heroRef}
           >
-            <SplitText
-              text="Our Expertise in UI/UX Design"
-              className="text-4xl md:text-5xl font-bold text-center"
-              delay={100}
-              animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
-              animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
-              easing="easeOutCubic"
-              threshold={0.3}
-              rootMargin="-50px"
-              onLetterAnimationComplete={handleAnimationComplete} 
-            />
+            <GradientText
+              colors={['#ED184F', "#4079ff", '#ED184F', "#4079ff", '#ED184F']}
+              animationSpeed={3}
+              showBorder={false}
+              className="custom-class"
+            >
+              <SplitText
+                text="Our Expertise in UI/UX Design"
+                className="text-4xl md:text-5xl font-bold text-center"
+                delay={100}
+                animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+                animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+                easing="easeOutCubic"
+                threshold={0.3}
+                rootMargin="-50px"
+                onLetterAnimationComplete={handleAnimationComplete} 
+              />
+            </GradientText>
+            
             {/* <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Expertise in UI/UX Design</h1> */}
             <p className="text-xl max-w-3xl mx-auto mt-6">
               We offer end-to-end design solutions to elevate your user experience and transform your digital presence.
@@ -104,24 +114,28 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20">
+      <section className="py-20 bg-gradient-to-r from-primary to-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {services.map((service, index) => (
-              <div key={index} className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-110 hover:bg-primary hover:text-white">
-                <div className="inline-block p-3 bg-red-100 rounded-full mb-4">
-                  {service.icon}
-                </div>
-                <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-                <p className="text-gray-600 mb-6">{service.description}</p>
-                <ul className="space-y-2">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center text-gray-700">
-                      <ArrowRight className="h-4 w-4 text-secondary mr-2" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+              <div key={index} className="bg-white p-5 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-110 hover:bg-primary hover:text-white">
+                <SpotlightCard
+                  className='custom-spotlight-card' spotlightColor='#ED184F'
+                >
+                  <div className="inline-block p-3 bg-red-100 rounded-full mb-4">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold pb-4">{service.title}</h3>
+                  <p className="text-gray-600 pb-6">{service.description}</p>
+                  <ul className="space-y-2">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center text-gray-700">
+                        <ArrowRight className="h-4 w-4 text-secondary mr-2" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </SpotlightCard>
               </div>
             ))}
           </div>
