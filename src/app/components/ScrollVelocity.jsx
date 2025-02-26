@@ -10,6 +10,12 @@ import {
 } from "framer-motion";
 import GradientText from "./GradientText";
 
+if (!window.requestAnimationFrame) {
+    window.requestAnimationFrame = function(callback) {
+        return setTimeout(callback, 1000 / 60);
+    };
+}
+
 function useElementWidth(ref) {
   const [width, setWidth] = useState(0);
 
@@ -118,20 +124,19 @@ export const ScrollVelocity = ({
         className={`${parallaxClassName} relative overflow-hidden`}
         style={parallaxStyle}
       >
-        <GradientText
+        {/* <GradientText
             colors={['#ED184F', "#4079ff", '#ED184F', "#4079ff", '#ED184F']}
             animationSpeed={3}
             showBorder={false}
             className="custom-class"
-        >
+        > */}
             <motion.div
-            className={`${scrollerClassName} flex whitespace-nowrap text-center font-sans text-base font-bold tracking-[-0.02em] drop-shadow md:text-[5rem] md:leading-[5rem]`}
+            className={`${scrollerClassName} flex whitespace-nowrap text-center text-secondary font-sans text-base font-bold tracking-[-0.02em] drop-shadow md:text-[5rem] md:leading-[5rem]`}
             style={{ x, ...scrollerStyle }}
             >
             {spans}
             </motion.div>
-        </GradientText>
-        
+        {/* </GradientText> */}
       </div>
     );
   }

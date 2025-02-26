@@ -325,6 +325,13 @@ const Home = () => {
                 </div>
               ))}
             </motion.div>
+            <div className='mt-16 md:mt-20 sm:-mb-10'>
+              <ScrollVelocity
+                  texts={[ 'UI Mitra', 'UI/UX Design' ]} 
+                  velocity={80} 
+                  className="custom-scroll-text text-2xl md:text-7xl"
+              />
+            </div>
           </div>
           {/* <GradientText
             colors={['#ED184F', "#4079ff", '#ED184F', "#4079ff", '#ED184F']}
@@ -332,13 +339,6 @@ const Home = () => {
             // showBorder={false}
             className="custom-class"
           > */}
-          <div className='mt-20'>
-            <ScrollVelocity
-                texts={[ 'UI Mitra', 'UI/UX Design' ]} 
-                velocity={100} 
-                className="custom-scroll-text text-8xl"
-            />
-          </div>
             
           {/* </GradientText> */}
           
