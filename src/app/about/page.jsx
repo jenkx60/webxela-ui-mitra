@@ -138,6 +138,7 @@ const About = () => {
                 src={team}
                 alt="Team collaboration"
                 className="rounded-lg shadow-xl"
+                loading='lazy'
               />
             </motion.div>
           </div>
@@ -218,6 +219,7 @@ const About = () => {
                   alt={member.name}
                   width={150}
                   height={50}
+                  loading='lazy'
                   className="w-full h-64 object-cover"
                 />
                 {/* <TiltedCard 

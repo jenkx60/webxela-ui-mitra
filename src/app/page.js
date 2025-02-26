@@ -15,6 +15,8 @@ import Particles from './components/Particles';
 import TrueFocus from './components/TrueFocus';
 import SEO from './components/SEO';
 import SpotlightCard from './components/Spotlight';
+import ScrollVelocity from './components/ScrollVelocity';
+import GradientText from './components/GradientText';
 // import FallingText from './components/FallingText';
 // import Aurora from './components/Aurora';
 
@@ -324,6 +326,22 @@ const Home = () => {
               ))}
             </motion.div>
           </div>
+          {/* <GradientText
+            colors={['#ED184F', "#4079ff", '#ED184F', "#4079ff", '#ED184F']}
+            animationSpeed={3}
+            // showBorder={false}
+            className="custom-class"
+          > */}
+          <div className='mt-20'>
+            <ScrollVelocity
+                texts={[ 'UI Mitra', 'UI/UX Design' ]} 
+                velocity={100} 
+                className="custom-scroll-text text-8xl"
+            />
+          </div>
+            
+          {/* </GradientText> */}
+          
         </section>
 
         {/* Testimonials */}

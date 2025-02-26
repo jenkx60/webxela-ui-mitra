@@ -132,7 +132,7 @@ const Blog = () => {
             showBorder={false}
             className="custom-class"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Blog</h1>
+            <h1 className="text-4xl md:text-5xl font-bold">Our Blog</h1>
             {/* <SplitText
               text="Our Blog"
               className="text-4xl md:text-5xl font-bold text-center"
@@ -195,6 +195,7 @@ const Blog = () => {
                     className="w-full h-full object-cover transform hover:scale-110 transition duration-500"
                     width={300}
                     height={300}
+                    loading='lazy'
                   />
                 </div>
                 <SpotlightCard

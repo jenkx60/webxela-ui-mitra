@@ -92,7 +92,7 @@ const Services = () => {
               showBorder={false}
               className="custom-class"
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Expertise in UI/UX Design</h1>
+              <h1 className="text-4xl md:text-5xl font-bold ">Our Expertise in UI/UX Design</h1>
               {/* <SplitText
                 text="Our Expertise in UI/UX Design"
                 className="text-4xl md:text-5xl font-bold text-center"

@@ -140,7 +140,7 @@ const Portfolio = () => {
             showBorder={false}
             className="custom-class"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Portfolio</h1>
+            <h1 className="text-4xl md:text-5xl font-bold">Our Portfolio</h1>
             {/* <SplitText
               text="Our Portfolio"
               className="text-4xl md:text-5xl font-bold text-center"
@@ -208,6 +208,7 @@ const Portfolio = () => {
                     className="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
                     width={300}
                     height={300}
+                    loading='lazy'
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
@@ -267,6 +268,7 @@ const Portfolio = () => {
                     className="w-full h-full object-cover"
                     width={300}
                     height={300}
+                    loading='lazy'
                   />
                 </div>
                 <div className="p-6">

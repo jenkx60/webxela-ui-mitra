@@ -69,7 +69,7 @@ const contact = () => {
               showBorder={false}
               className="custom-class"
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">Get in Touch</h1>
+              <h1 className="text-4xl md:text-5xl font-bold">Get in Touch</h1>
               {/* <BlurText
                 text="Get in Touch!"
                 delay={100}
