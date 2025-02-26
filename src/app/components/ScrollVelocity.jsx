@@ -10,11 +10,11 @@ import {
 } from "framer-motion";
 import GradientText from "./GradientText";
 
-if (!window.requestAnimationFrame) {
-    window.requestAnimationFrame = function(callback) {
-        return setTimeout(callback, 1000 / 60);
-    };
-}
+// if (!window.requestAnimationFrame) {
+//     window.requestAnimationFrame = function(callback) {
+//         return setTimeout(callback, 1000 / 60);
+//     };
+// }
 
 function useElementWidth(ref) {
   const [width, setWidth] = useState(0);
